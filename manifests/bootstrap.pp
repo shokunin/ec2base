@@ -10,7 +10,7 @@ class ec2base::bootstrap inherits ec2base {
     source => 'puppet:///modules/ec2base/parse_user_data.rb',
   }
 
-  file { '/etc/local/bin/ec2_bootstrap':
+  file { '/usr/local/bin/ec2_bootstrap':
     ensure => present,
     owner  => root,
     group  => root,
