@@ -1,16 +1,5 @@
 #!/bin/sh
 
-### BEGIN INIT INFO
-# Provides:             tru_bootstrap
-# Required-Start:       $remote_fs $syslog
-# Required-Stop:        $remote_fs $syslog
-# Default-Start:        2 3 4 5
-# X-Start-Before:       consul supervisord
-# X-Stop-After:         consul supervisord
-# Default-Stop:
-# Short-Description:    Setup the hostname and be ready for fun
-### END INIT INFO
-
 
 ROLE=`/usr/local/bin/parse_user_data --param role`
 DOMAIN=`/usr/local/bin/parse_user_data --param domain`
@@ -28,3 +17,4 @@ hostname "${ROLE}-${INSTANCE_ID}.${DOMAIN}" > /dev/null
 
 /usr/local/bin/parse_user_data -y > /etc/node_info.yaml
 
+exit 0

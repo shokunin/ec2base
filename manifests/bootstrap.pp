@@ -32,5 +32,11 @@ class ec2base::bootstrap inherits ec2base {
     refreshonly => true,
   }
 
+  file { '/etc/systemd/system/multi-user.target.wants/bootstrap.service':
+    ensure  => link,
+    target  => '/lib/systemd/system/bootstrap.service',
+    require => File['/lib/systemd/system/bootstrap.service']
+  }
+
 
 }

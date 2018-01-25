@@ -4,7 +4,7 @@ Before=puppet.service supervisord.service
 
 [Service]
 Type=oneshot
-ExecStart=/etc/local/bin/ec2_bootstrap
+ExecStart=/usr/local/bin/ec2_bootstrap
 RemainAfterExit=true
 StandardOutput=journal
 
