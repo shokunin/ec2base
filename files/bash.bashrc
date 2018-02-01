@@ -13,7 +13,7 @@ fi
 alias ctc="cd && clear"
 alias eigo="export LANG=C;export LC_ALL=C"
 alias src="echo \"Updating Settings\" && . ~/.bash_profile"
-alias v="set -o vi"
+alias k="set -o vi"
 ##################################################################
 #Ubuntu specific change for your needs
 if [ -e /lib/terminfo/x/xterm-256color ]; then
