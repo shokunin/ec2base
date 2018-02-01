@@ -1,0 +1,16 @@
+###############################################
+#           Puppet controlled
+###############################################
+<% @sysctl_entries.sort.each do |sysctl| -%>
+<% if sysctl[1].has_key? "comment" -%>
+# <%= sysctl[1]['comment'] -%>
+<% end -%>
+<%= sysctl[0] %>=<%= sysctl[1]['value'] %>
+#
+<% end -%>
+
+<% if @is_virtual == 'true' %>
+<% if @operatingsystem == 'CentOS' %>
+xen.independent_wallclock=1
+<% end %>
+<% end %>
