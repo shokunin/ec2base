@@ -21,6 +21,14 @@ if [ -e /lib/terminfo/x/xterm-256color ]; then
 else
 	export TERM="xterm"
 fi
+
+##################################################################
+# Puppet Agent
+
+if [ -d /opt/puppetlabs/puppet/bin ] ; then
+	PATH=$PATH:/opt/puppetlabs/puppet/bin
+fi
+
 ##################################################################
 #rvm
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then
