@@ -2,6 +2,8 @@
 # ===========================
 class ec2base::bootstrap inherits ec2base {
 
+  include stdlib
+
   file { '/usr/local/bin/parse_user_data':
     ensure => present,
     owner  => root,
@@ -36,6 +38,18 @@ class ec2base::bootstrap inherits ec2base {
     ensure  => link,
     target  => '/lib/systemd/system/bootstrap.service',
     require => File['/lib/systemd/system/bootstrap.service']
+  }
+
+  file_line { 'blank_hosts':
+    ensure            => absent,
+    path              => '/etc/hosts',
+    match             => "^ ${::hostname} ${::fqdn}",
+    match_for_absence => true,
+  }
+
+  file_line { 'hostfile_entry':
+    ensure => present,
+    line   => "${::ipaddress} ${::hostname} ${::fqdn}",
   }
 
 
