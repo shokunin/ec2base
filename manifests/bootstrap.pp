@@ -49,6 +49,7 @@ class ec2base::bootstrap inherits ec2base {
 
   file_line { 'hostfile_entry':
     ensure => present,
+    path   => '/etc/hosts',
     line   => "${::ipaddress} ${::hostname} ${::fqdn}",
   }
 
