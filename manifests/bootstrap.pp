@@ -47,6 +47,13 @@ class ec2base::bootstrap inherits ec2base {
     match_for_absence => true,
   }
 
+  file_line { 'bad_hosts':
+    ensure            => absent,
+    path              => '/etc/hosts',
+    match             => '^ -[a-f0-9]{14,17} -[a-f0-9]{14,17}',
+    match_for_absence => true,
+  }
+
   file_line { 'hostfile_entry':
     ensure => present,
     path   => '/etc/hosts',
