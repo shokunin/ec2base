@@ -1,10 +1,15 @@
 #!/bin/sh
 
+if [ -x /opt/puppetlabs/bin/facter ] ; then
+	IP=`/opt/puppetlabs/bin/facter ipaddress`
+else
+	IP=`/usr/bin/facter ipaddress`
+fi
+
 
 ROLE=`/usr/local/bin/parse_user_data --param role`
 DOMAIN=`/usr/local/bin/parse_user_data --param domain`
 INSTANCE_ID=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/instance-id |awk -F '-' '{print $NF}'`
-IP=`/usr/bin/facter ipaddress`
 
 if [ $(grep -c $IP /etc/hosts) -ne 0 ] ; then
   X="y"
