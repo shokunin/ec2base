@@ -3,7 +3,7 @@
 class ec2base::packages inherits ec2base {
 
   # These will go everywhere
-  $default_pkgs = [ 'htop', 'tcpdump', 'telnet', 'sysstat', 'prometheus-node-exporter' ]
+  $default_pkgs = [ 'htop', 'tcpdump', 'telnet', 'sysstat' ]
   $ec2base_pkgs = hiera_array('ec2base_packages', [])
   $final_pkgs = unique(concat($default_pkgs, $ec2base_pkgs))
 
