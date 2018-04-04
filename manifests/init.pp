@@ -6,5 +6,6 @@ class ec2base {
   include ec2base::bootstrap
   include ec2base::bashrc
   include ec2base::sysctl
+  include ec2base::resolv
 
 }
