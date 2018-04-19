@@ -26,11 +26,16 @@ class ec2base::resolv inherits ec2base {
     group   => root,
     mode    => '0644',
     source => 'puppet:///modules/ec2base/disable-ipv6.service',
-    notify  => Exec['vault_systemctl_reload_disable-ipv6'],
+    notify  => Exec['systemctl_reload_disable-ipv6', 'hard_disable-ipv6'],
   }
 
-  exec { 'vault_systemctl_reload_disable-ipv6':
+  exec { 'systemctl_reload_disable-ipv6':
     command     =>  '/bin/systemctl daemon-reload',
+    refreshonly => true,
+  }
+
+  exec { 'hard_disable-ipv6':
+    command     =>  '/bin/echo 1 > /proc/sys/net/ipv6/conf/eth0/disable_ipv6'
     refreshonly => true,
   }
 
@@ -44,7 +49,7 @@ class ec2base::resolv inherits ec2base {
 		ensure  => running,
 		enable  => true,
 		require => [File['/etc/systemd/system/multi-user.target.wants/disable-ipv6.service'],
-								Exec['vault_systemctl_reload_disable-ipv6']]
+								Exec['systemctl_reload_disable-ipv6']]
 	}
 
 
