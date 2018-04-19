@@ -12,4 +12,13 @@ class ec2base::resolv inherits ec2base {
     source => 'puppet:///modules/ec2base/resolv_head',
   }
 
+  file { '/etc/gai.conf':
+    ensure => present,
+    owner  => root,
+    group  => root,
+    mode   => '0644',
+    source => 'puppet:///modules/ec2base/gai.conf',
+  }
+  
+
 }
