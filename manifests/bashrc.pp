@@ -2,11 +2,7 @@
 # ===========================
 class ec2base::bashrc inherits ec2base {
 
-  if $::virtual == 'virtualbox' {
-    $base_user = 'vagrant'
-  } else {
-    $base_user = 'ubuntu'
-  }
+  $base_user = 'ubuntu'
 
   file { "/home/${base_user}/.bashrc":
     ensure => present,
