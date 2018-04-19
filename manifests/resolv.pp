@@ -35,7 +35,7 @@ class ec2base::resolv inherits ec2base {
   }
 
   exec { 'hard_disable-ipv6':
-    command     =>  '/bin/echo 1 > /proc/sys/net/ipv6/conf/eth0/disable_ipv6'
+    command     =>  '/bin/echo 1 > /proc/sys/net/ipv6/conf/eth0/disable_ipv6',
     refreshonly => true,
   }
 
