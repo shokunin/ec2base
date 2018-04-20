@@ -4,6 +4,8 @@ class ec2base::resolv inherits ec2base {
 
   #adds some options to resolv.conf to behave better in a cloud environment
 
+  $primary_interface = $::networking['primary']
+
   file { '/etc/resolvconf/resolv.conf.d/head':
     ensure => present,
     owner  => root,
@@ -25,7 +27,7 @@ class ec2base::resolv inherits ec2base {
     owner   => root,
     group   => root,
     mode    => '0644',
-    source => 'puppet:///modules/ec2base/disable-ipv6.service',
+    content => template('ec2base/disable-ipv6.service.erb'),
     notify  => Exec['systemctl_reload_disable-ipv6', 'hard_disable-ipv6'],
   }
 
@@ -35,7 +37,7 @@ class ec2base::resolv inherits ec2base {
   }
 
   exec { 'hard_disable-ipv6':
-    command     =>  "/bin/echo 1 > /proc/sys/net/ipv6/conf/${$::interfaces[primary]}/disable_ipv6",
+    command     =>  "/bin/echo 1 > /proc/sys/net/ipv6/conf/${primary_interface}/disable_ipv6",
     refreshonly => true,
   }
 
