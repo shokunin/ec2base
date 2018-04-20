@@ -1,6 +1,7 @@
 #################################################################################################
 #				Puppet Controlled
 #################################################################################################
+#
 [Unit]
 Description=Disable IPV6 entirely
 Before=network-online.target
@@ -8,7 +9,7 @@ Before=network-online.target
 [Service]
 User=root
 Type=oneshot
-ExecStart=/bin/echo 1 > /proc/sys/net/ipv6/conf/eth0/disable_ipv6
+ExecStart=/bin/echo 1 > /proc/sys/net/ipv6/conf/<%= @primary_interface %>/disable_ipv6
 RemainAfterExit=true
 StandardOutput=journal
 
