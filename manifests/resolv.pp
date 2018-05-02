@@ -21,8 +21,8 @@ class ec2base::resolv inherits ec2base {
     mode   => '0644',
     source => 'puppet:///modules/ec2base/gai.conf',
   }
-  
- file { '/lib/systemd/system/disable-ipv6.service':
+
+  file { '/lib/systemd/system/disable-ipv6.service':
     ensure  => present,
     owner   => root,
     group   => root,
@@ -47,12 +47,11 @@ class ec2base::resolv inherits ec2base {
     require => File['/lib/systemd/system/disable-ipv6.service']
   }
 
-	service { 'disable-ipv6':
-		ensure  => running,
-		enable  => true,
-		require => [File['/etc/systemd/system/multi-user.target.wants/disable-ipv6.service'],
-								Exec['systemctl_reload_disable-ipv6']]
-	}
-
+  service { 'disable-ipv6':
+    ensure  => running,
+    enable  => true,
+    require => [File['/etc/systemd/system/multi-user.target.wants/disable-ipv6.service'],
+    Exec['systemctl_reload_disable-ipv6']]
+  }
 
 }
