@@ -4,6 +4,8 @@ class ec2base::sysctl inherits ec2base {
 
   $sysctl_entries = hiera_hash('sysctl', {})
 
+  notify {"DTM: $sysctl_entries": }
+
   file { '/etc/sysctl.conf':
     ensure  => present,
     owner   => root,
