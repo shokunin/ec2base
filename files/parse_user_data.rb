@@ -38,5 +38,6 @@ begin
   end
 rescue Exception => e
   STDERR.puts "SCRIPT ERROR: #{e.message}"
+  exit! 1
 end
 
